@@ -21,7 +21,7 @@
       <bpmn:incoming>SequenceFlow_0yeyyi6</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1l8hx9c</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:businessRuleTask id="BusinessRuleTask_1lfg6k6" name="Verificar Perfil Financeiro">
+    <bpmn:businessRuleTask id="BusinessRuleTask_1lfg6k6" name="Verificar Preferências Financeiras">
       <bpmn:incoming>SequenceFlow_1l8hx9c</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_08qhd5d</bpmn:outgoing>
     </bpmn:businessRuleTask>
