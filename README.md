@@ -13,3 +13,6 @@ O pacote uml contém os diagramas utilizados para a análise.
 
 ## requirements
 O pacote requirements contém os requisitos iniciais.
+
+## sql
+O pacote sql contém os scripts necessários para a criaçao do banco de dados sob o MSSQL.
