@@ -14,9 +14,9 @@ USE [master]
 GO
 /****** Object:  Database [Spayce]    Script Date: 02/11/2016 14:16:29 ******/
 CREATE DATABASE [Spayce] ON  PRIMARY
-( NAME = N'Spayce', FILENAME = N'C:\MSSQL\Data\Spyce.mdf' , SIZE = 5072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+( NAME = N'Spayce', FILENAME = N'C:\MSSQL\Data\Spayce.mdf' , SIZE = 5072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
 LOG ON
-( NAME = N'Spayce_log', FILENAME = N'C:\MSSQL\Log\Spyce_log.ldf' , SIZE = 2048KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+( NAME = N'Spayce_log', FILENAME = N'C:\MSSQL\Log\Spayce_log.ldf' , SIZE = 2048KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
 GO
 ALTER DATABASE [Spayce] SET COMPATIBILITY_LEVEL = 100
 GO
