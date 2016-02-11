@@ -124,7 +124,7 @@ CREATE TABLE [setup].[Account](
       [Name] [nvarchar](100) NOT NULL,
       [Email] [nvarchar](100) NOT NULL,
       [Password] [nvarchar](100) NOT NULL,
-      [AutenticationType] [nchar](3) NOT NULL,
+      [AutenticationType] [nchar](15) NOT NULL,
       [Cpf] [nchar](11) NOT NULL,
       [Image] [image] NULL,
 CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED
