@@ -5560,7 +5560,7 @@
 													"lineColor": "#000000",
 													"fillColor": "#ffffff",
 													"fontColor": "#000000",
-													"font": "Arial;13;3",
+													"font": "Arial;13;1",
 													"parentStyle": true,
 													"containerChangeable": false,
 													"containerExtending": true,
@@ -5769,7 +5769,7 @@
 													"height": 13,
 													"autoResize": false,
 													"underline": false,
-													"text": "-Cpf",
+													"text": "-Cpf {unique}",
 													"horizontalAlignment": 0,
 													"verticalAlignment": 5
 												}
@@ -16298,13 +16298,13 @@
 									"isLeaf": false,
 									"isReadOnly": false,
 									"isOrdered": false,
-									"isUnique": false,
+									"isUnique": true,
 									"isDerived": false,
 									"aggregation": "none",
 									"isID": false
 								}
 							],
-							"isAbstract": true,
+							"isAbstract": false,
 							"isFinalSpecification": false,
 							"isLeaf": false,
 							"isActive": false
