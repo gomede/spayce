@@ -86,14 +86,14 @@ GO
 /****** Object:  Schema [setup]    Script Date: 02/11/2016 14:16:29 ******/
 CREATE SCHEMA [setup] AUTHORIZATION [dbo]
 GO
-/****** Object:  Table [dbo].[UserConnection]    Script Date: 02/11/2016 14:16:30 ******/
+/****** Object:  Table [setup].[UserConnection]    Script Date: 02/11/2016 14:16:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [setup].[UserConnection](
-      [UserId] [nvarchar](50) NOT NULL,
-      [ProviderId] [nvarchar](50) NOT NULL,
+      [UserId] [nvarchar](255) NOT NULL,
+      [ProviderId] [nvarchar](255) NOT NULL,
       [ProviderUserId] [nvarchar](50) NOT NULL,
       [Rank] [int] NOT NULL,
       [DisplayName] [nvarchar](255) NULL,
@@ -116,7 +116,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [setup].[User](
+CREATE TABLE [setup].[Account](
       [Id] [bigint] IDENTITY(1,1) NOT NULL,
     [CreateOn] [datetime2](7) NOT NULL,
     [UpdateOn] [datetime2](7) NOT NULL,
@@ -127,21 +127,21 @@ CREATE TABLE [setup].[User](
       [AutenticationType] [nchar](3) NOT NULL,
       [Cpf] [nchar](11) NOT NULL,
       [Image] [image] NULL,
-CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED
+CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED
 (
       [Id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [UK_User_Cpf] ON [setup].[User]
+CREATE UNIQUE NONCLUSTERED INDEX [UK_Account_Cpf] ON [setup].[Account]
 (
       [Cpf] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [UK_User_Email] ON [setup].[User]
+CREATE UNIQUE NONCLUSTERED INDEX [UK_Account_Email] ON [setup].[Account]
 (
       [Email] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 GO
  
-INSERT INTO [setup].[User] VALUES (GETDATE(), GETDATE(), 0, 'Root', 'root@spayce.com.br', 'spayce', 'SPA', '77407172749', NULL)
+INSERT INTO [setup].[Account] VALUES (GETDATE(), GETDATE(), 0, 'Root', 'root@spayce.com.br', 'spayce', 'SPA', '77407172749', NULL)
