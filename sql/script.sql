@@ -1,6 +1,18 @@
+EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'Spayce'
+GO
 USE [master]
 GO
-/****** Object:  Database [Spayce]    Script Date: 02/11/2016 09:57:20 ******/
+ALTER DATABASE [Spayce] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE
+GO
+USE [master]
+GO
+/****** Object:  Database [Spayce]    Script Date: 02/11/2016 14:39:41 ******/
+DROP DATABASE [Spayce]
+GO
+ 
+USE [master]
+GO
+/****** Object:  Database [Spayce]    Script Date: 02/11/2016 14:16:29 ******/
 CREATE DATABASE [Spayce] ON  PRIMARY
 ( NAME = N'Spyce', FILENAME = N'C:\MSSQL\Data\Spyce.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
 LOG ON
@@ -71,35 +83,65 @@ ALTER DATABASE [Spayce] SET DB_CHAINING OFF
 GO
 USE [Spayce]
 GO
-/****** Object:  Schema [setup]    Script Date: 02/11/2016 09:57:20 ******/
+/****** Object:  Schema [setup]    Script Date: 02/11/2016 14:16:29 ******/
 CREATE SCHEMA [setup] AUTHORIZATION [dbo]
 GO
-/****** Object:  Table [setup].[Usuario]    Script Date: 02/11/2016 09:57:21 ******/
+/****** Object:  Table [dbo].[UserConnection]    Script Date: 02/11/2016 14:16:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [setup].[Usuario](
-      [ID] [bigint] IDENTITY(1,1) NOT NULL,
-      [Nome] [nvarchar](100) NOT NULL,
+CREATE TABLE [setup].[UserConnection](
+      [UserId] [nvarchar](255) NOT NULL,
+      [ProviderId] [nvarchar](255) NOT NULL,
+      [ProviderUserId] [nvarchar](255) NOT NULL,
+      [Rank] [int] NOT NULL,
+      [DisplayName] [nvarchar](255) NULL,
+      [ProfileUrl] [nvarchar](512) NULL,
+      [ImageUrl] [nvarchar](512) NULL,
+      [AccessToken] [nvarchar](255) NOT NULL,
+      [Secret] [nvarchar](255) NULL,
+      [RefreshToken] [nvarchar](255) NULL,
+      [ExpireTime] [bigint] NULL,
+CONSTRAINT [PK_UserConnection] PRIMARY KEY CLUSTERED
+(
+      [UserId] ASC,
+      [ProviderId] ASC,
+      [ProviderUserId] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [setup].[User]    Script Date: 02/11/2016 14:16:30 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [setup].[User](
+      [Id] [bigint] IDENTITY(1,1) NOT NULL,
+    [CreateOn] [datetime2](7) NOT NULL,
+    [UpdateOn] [datetime2](7) NOT NULL,
+    [Version] [bigint] NOT NULL,
+      [Name] [nvarchar](100) NOT NULL,
       [Email] [nvarchar](100) NOT NULL,
       [Password] [nvarchar](50) NOT NULL,
-      [TipoAutenticacao] [nchar](3) NOT NULL,
-      [Cpf] [nchar](3) NOT NULL,
-      [Foto] [image] NOT NULL,
-CONSTRAINT [PK_Usuario] PRIMARY KEY CLUSTERED
+      [AutenticationType] [nchar](3) NOT NULL,
+      [Cpf] [nchar](11) NOT NULL,
+      [Image] [image] NULL,
+CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED
 (
-      [ID] ASC
+      [Id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [UK_Usuario_Cpf] ON [setup].[Usuario]
+CREATE UNIQUE NONCLUSTERED INDEX [UK_User_Cpf] ON [setup].[User]
 (
       [Cpf] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [UK_Usuario_Email] ON [setup].[Usuario]
+CREATE UNIQUE NONCLUSTERED INDEX [UK_User_Email] ON [setup].[User]
 (
       [Email] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 GO
+ 
+INSERT INTO [setup].[User] VALUES (GETDATE(), GETDATE(), 0, 'Root', 'root@spayce.com.br', 'spayce', 'SPA', '99999999999', NULL)
