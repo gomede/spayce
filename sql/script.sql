@@ -92,9 +92,9 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [setup].[UserConnection](
-      [UserId] [nvarchar](255) NOT NULL,
-      [ProviderId] [nvarchar](255) NOT NULL,
-      [ProviderUserId] [nvarchar](255) NOT NULL,
+      [UserId] [nvarchar](50) NOT NULL,
+      [ProviderId] [nvarchar](50) NOT NULL,
+      [ProviderUserId] [nvarchar](50) NOT NULL,
       [Rank] [int] NOT NULL,
       [DisplayName] [nvarchar](255) NULL,
       [ProfileUrl] [nvarchar](512) NULL,
