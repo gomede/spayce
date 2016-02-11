@@ -123,7 +123,7 @@ CREATE TABLE [setup].[Account](
     [Version] [bigint] NOT NULL,
       [Name] [nvarchar](100) NOT NULL,
       [Email] [nvarchar](100) NOT NULL,
-      [Password] [nvarchar](50) NOT NULL,
+      [Password] [nvarchar](100) NOT NULL,
       [AutenticationType] [nchar](3) NOT NULL,
       [Cpf] [nchar](11) NOT NULL,
       [Image] [image] NULL,
