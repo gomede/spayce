@@ -86,12 +86,12 @@ GO
 /****** Object:  Schema [setup]    Script Date: 02/11/2016 14:16:29 ******/
 CREATE SCHEMA [setup] AUTHORIZATION [dbo]
 GO
-/****** Object:  Table [setup].[UserConnection]    Script Date: 02/11/2016 14:16:30 ******/
+/****** Object:  Table [dbo].[UserConnection]    Script Date: 02/11/2016 14:16:30 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [setup].[UserConnection](
+CREATE TABLE [dbo].[UserConnection](
       [UserId] [nvarchar](255) NOT NULL,
       [ProviderId] [nvarchar](255) NOT NULL,
       [ProviderUserId] [nvarchar](50) NOT NULL,
