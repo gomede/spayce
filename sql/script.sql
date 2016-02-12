@@ -6,12 +6,13 @@ ALTER DATABASE [Spayce] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE
 GO
 USE [master]
 GO
+
 /****** Object:  Database [Spayce]    Script Date: 02/11/2016 14:39:41 ******/
 DROP DATABASE [Spayce]
 GO
 USE [master]
 GO
-/****** Object:  Database [Spayce]    Script Date: 02/12/2016 11:20:12 ******/
+/****** Object:  Database [Spayce]    Script Date: 02/12/2016 14:49:08 ******/
 CREATE DATABASE [Spayce] ON  PRIMARY
 ( NAME = N'Spayce', FILENAME = N'C:\MSSQL\Data\Spayce.mdf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
 LOG ON
@@ -82,10 +83,13 @@ ALTER DATABASE [Spayce] SET DB_CHAINING OFF
 GO
 USE [Spayce]
 GO
-/****** Object:  Schema [setup]    Script Date: 02/12/2016 11:20:12 ******/
+/****** Object:  Schema [setup]    Script Date: 02/12/2016 14:49:08 ******/
 CREATE SCHEMA [setup] AUTHORIZATION [dbo]
 GO
-/****** Object:  Table [setup].[Account]    Script Date: 02/12/2016 11:20:13 ******/
+/****** Object:  Schema [campaign]    Script Date: 02/12/2016 14:49:08 ******/
+CREATE SCHEMA [campaign] AUTHORIZATION [dbo]
+GO
+/****** Object:  Table [setup].[Account]    Script Date: 02/12/2016 14:49:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -107,17 +111,17 @@ CONSTRAINT [PK_Account] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-CREATE UNIQUE NONCLUSTERED INDEX [UK_Account_Identifier] ON [setup].[Account]
-(
-      [Identifier] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-GO
 CREATE UNIQUE NONCLUSTERED INDEX [UK_Account_Email] ON [setup].[Account]
 (
       [Email] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[UserConnection]    Script Date: 02/12/2016 11:20:13 ******/
+CREATE UNIQUE NONCLUSTERED INDEX [UK_Account_Identifier] ON [setup].[Account]
+(
+      [Identifier] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[UserConnection]    Script Date: 02/12/2016 14:49:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -142,7 +146,26 @@ CONSTRAINT [PK_UserConnection] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [setup].[Segment]    Script Date: 02/12/2016 11:20:13 ******/
+/****** Object:  Table [setup].[Tag]    Script Date: 02/12/2016 14:49:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [setup].[Tag](
+      [Id] [bigint] IDENTITY(1,1) NOT NULL,
+      [CreateOn] [datetime2](7) NOT NULL,
+      [UpdateOn] [datetime2](7) NOT NULL,
+      [Version] [int] NOT NULL,
+      [Name] [nvarchar](100) NOT NULL,
+      [TagType] [nchar](10) NOT NULL,
+      [Attribute] [nvarchar](100) NOT NULL,
+CONSTRAINT [PK_Tag] PRIMARY KEY CLUSTERED
+(
+      [Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [setup].[Segment]    Script Date: 02/12/2016 14:49:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -159,7 +182,7 @@ CONSTRAINT [PK_Segment] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [setup].[Merchant]    Script Date: 02/12/2016 11:20:13 ******/
+/****** Object:  Table [setup].[Merchant]    Script Date: 02/12/2016 14:49:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -184,12 +207,67 @@ CREATE UNIQUE NONCLUSTERED INDEX [UK_Merchant_Identifier] ON [setup].[Merchant]
       [Id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 GO
-/****** Object:  ForeignKey [FK_Merchant_Segment]    Script Date: 02/12/2016 11:20:13 ******/
+/****** Object:  Table [campaign].[Campaign]    Script Date: 02/12/2016 14:49:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [campaign].[Campaign](
+      [Id] [bigint] IDENTITY(1,1) NOT NULL,
+      [CreateOn] [datetime2](7) NOT NULL,
+      [UpdateOn] [datetime2](7) NOT NULL,
+      [Version] [int] NOT NULL,
+      [Name] [nvarchar](100) NOT NULL,
+      [ExpirationDate] [datetime2](7) NOT NULL,
+      [StatusType] [nchar](10) NOT NULL,
+      [Merchant_fk] [bigint] NOT NULL,
+CONSTRAINT [PK_Campaign] PRIMARY KEY CLUSTERED
+(
+      [Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [campaign].[Script]    Script Date: 02/12/2016 14:49:09 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [campaign].[Script](
+      [Id] [bigint] IDENTITY(1,1) NOT NULL,
+      [CreateOn] [datetime2](7) NOT NULL,
+      [UpdateOn] [datetime2](7) NOT NULL,
+      [Version] [int] NOT NULL,
+      [Name] [nvarchar](100) NOT NULL,
+      [ExpirationDate] [datetime2](7) NOT NULL,
+      [Campaign_fk] [bigint] NOT NULL,
+CONSTRAINT [PK_Script] PRIMARY KEY CLUSTERED
+(
+      [Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  ForeignKey [FK_Merchant_Segment]    Script Date: 02/12/2016 14:49:09 ******/
 ALTER TABLE [setup].[Merchant]  WITH CHECK ADD  CONSTRAINT [FK_Merchant_Segment] FOREIGN KEY([Segment])
 REFERENCES [setup].[Segment] ([Id])
 GO
 ALTER TABLE [setup].[Merchant] CHECK CONSTRAINT [FK_Merchant_Segment]
 GO
+/****** Object:  ForeignKey [FK_Campaign_Merchant]    Script Date: 02/12/2016 14:49:09 ******/
+ALTER TABLE [campaign].[Campaign]  WITH CHECK ADD  CONSTRAINT [FK_Campaign_Merchant] FOREIGN KEY([Merchant_fk])
+REFERENCES [setup].[Merchant] ([Id])
+GO
+ALTER TABLE [campaign].[Campaign] CHECK CONSTRAINT [FK_Campaign_Merchant]
+GO
+/****** Object:  ForeignKey [FK_Script_Campaign]    Script Date: 02/12/2016 14:49:09 ******/
+ALTER TABLE [campaign].[Script]  WITH CHECK ADD  CONSTRAINT [FK_Script_Campaign] FOREIGN KEY([Campaign_fk])
+REFERENCES [campaign].[Campaign] ([Id])
+GO
+ALTER TABLE [campaign].[Script] CHECK CONSTRAINT [FK_Script_Campaign]
+GO
+ 
 INSERT INTO [setup].[Account] VALUES (GETDATE(), GETDATE(), 0, 'Root', 'root@spayce.com.br', 'spayce', 'SPA', '77407172749', NULL)
 INSERT INTO [setup].[Segment] VALUES (GETDATE(), GETDATE(), 0, 'Transporte Aéreo')
 INSERT INTO [setup].[Merchant] VALUES (GETDATE(), GETDATE(), 0, '82393187000103', 'Mechant', NULL, 1)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Pessoas Físicas', 'Domain', 'PessoaType')
+INSERT INTO [campaign].[Campaign] VALUES (GETDATE(), GETDATE(), 0, 'FDS nos EUA', GETDATE(), 'New', 1)
+INSERT INTO [campaign].[Script] VALUES (GETDATE(), GETDATE(), 0, 'Compra', GETDATE(), 1)
