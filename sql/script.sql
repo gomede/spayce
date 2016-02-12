@@ -9,7 +9,6 @@ GO
 /****** Object:  Database [Spayce]    Script Date: 02/11/2016 14:39:41 ******/
 DROP DATABASE [Spayce]
 GO
- 
 USE [master]
 GO
 /****** Object:  Database [Spayce]    Script Date: 02/12/2016 11:20:12 ******/
@@ -149,7 +148,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [setup].[Segment](
-      [Id] [bigint] NOT NULL,
+      [Id] [bigint] IDENTITY(1,1) NOT NULL,
       [CreateOn] [datetime2](7) NOT NULL,
       [UpdateOn] [datetime2](7) NOT NULL,
       [Version] [int] NOT NULL,
@@ -166,7 +165,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [setup].[Merchant](
-      [Id] [bigint] NOT NULL,
+      [Id] [bigint] IDENTITY(1,1) NOT NULL,
       [CreateOn] [datetime2](7) NOT NULL,
       [UpdateOn] [datetime2](7) NOT NULL,
       [Version] [int] NULL,
@@ -191,5 +190,6 @@ REFERENCES [setup].[Segment] ([Id])
 GO
 ALTER TABLE [setup].[Merchant] CHECK CONSTRAINT [FK_Merchant_Segment]
 GO
- 
 INSERT INTO [setup].[Account] VALUES (GETDATE(), GETDATE(), 0, 'Root', 'root@spayce.com.br', 'spayce', 'SPA', '77407172749', NULL)
+INSERT INTO [setup].[Segment] VALUES (GETDATE(), GETDATE(), 0, 'Transporte Aéreo')
+INSERT INTO [setup].[Merchant] VALUES (GETDATE(), GETDATE(), 0, '82393187000103', 'Mechant', NULL, 1)
