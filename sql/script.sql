@@ -239,12 +239,6 @@ REFERENCES [setup].[Merchant] ([Id])
 GO
 ALTER TABLE [campaign].[Campaign] CHECK CONSTRAINT [FK_Campaign_Merchant]
 GO
-/****** Object:  ForeignKey [FK_Script_Campaign]    Script Date: 02/12/2016 14:49:09 ******/
-ALTER TABLE [campaign].[Script]  WITH CHECK ADD  CONSTRAINT [FK_Script_Campaign] FOREIGN KEY([Campaign_fk])
-REFERENCES [campaign].[Campaign] ([Id])
-GO
-ALTER TABLE [campaign].[Script] CHECK CONSTRAINT [FK_Script_Campaign]
-GO
  
 INSERT INTO [setup].[Account] VALUES (GETDATE(), GETDATE(), 0, 'Root', 'root@spayce.com.br', 'spayce', 'SPA', '77407172749', NULL)
 INSERT INTO [setup].[Segment] VALUES (GETDATE(), GETDATE(), 0, 'Transporte Aéreo')
