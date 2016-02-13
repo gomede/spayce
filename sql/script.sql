@@ -245,4 +245,3 @@ INSERT INTO [setup].[Segment] VALUES (GETDATE(), GETDATE(), 0, 'Transporte Aére
 INSERT INTO [setup].[Merchant] VALUES (GETDATE(), GETDATE(), 0, '82393187000103', 'Mechant', NULL, 1)
 INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Pessoas Físicas', 'Domain', 'PessoaType')
 INSERT INTO [campaign].[Campaign] VALUES (GETDATE(), GETDATE(), 0, 'FDS nos EUA', GETDATE(), 'New', 1)
-INSERT INTO [campaign].[Script] VALUES (GETDATE(), GETDATE(), 0, 'Compra', GETDATE(), 1)
