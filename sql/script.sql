@@ -227,25 +227,6 @@ CONSTRAINT [PK_Campaign] PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [campaign].[Script]    Script Date: 02/12/2016 14:49:09 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [campaign].[Script](
-      [Id] [bigint] IDENTITY(1,1) NOT NULL,
-      [CreateOn] [datetime2](7) NOT NULL,
-      [UpdateOn] [datetime2](7) NOT NULL,
-      [Version] [int] NOT NULL,
-      [Name] [nvarchar](100) NOT NULL,
-      [ExpirationDate] [datetime2](7) NOT NULL,
-      [Campaign_fk] [bigint] NOT NULL,
-CONSTRAINT [PK_Script] PRIMARY KEY CLUSTERED
-(
-      [Id] ASC
-)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
 /****** Object:  ForeignKey [FK_Merchant_Segment]    Script Date: 02/12/2016 14:49:09 ******/
 ALTER TABLE [setup].[Merchant]  WITH CHECK ADD  CONSTRAINT [FK_Merchant_Segment] FOREIGN KEY([Segment])
 REFERENCES [setup].[Segment] ([Id])
