@@ -240,7 +240,7 @@ GO
 ALTER TABLE [campaign].[Campaign] CHECK CONSTRAINT [FK_Campaign_Merchant]
 GO
  
-INSERT INTO [setup].[Account] VALUES (GETDATE(), GETDATE(), 0, 'Root', 'root@spayce.com.br', 'spayce', 'SPA', '77407172749', NULL)
+INSERT INTO [setup].[Account] VALUES (GETDATE(), GETDATE(), 0, 'Root', 'root@spayce.com.br', 'spayce', 'SPAYCE', '77407172749', NULL)
 INSERT INTO [setup].[Segment] VALUES (GETDATE(), GETDATE(), 0, 'Transporte Aéreo')
 INSERT INTO [setup].[Merchant] VALUES (GETDATE(), GETDATE(), 0, '82393187000103', 'Mechant', NULL, 1)
 INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Pessoas Físicas', 'Domain', 'PessoaType')
