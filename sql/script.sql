@@ -220,7 +220,7 @@ CREATE TABLE [campaign].[Campaign](
       [Name] [nvarchar](100) NOT NULL,
       [ExpirationDate] [datetime2](7) NOT NULL,
       [StatusType] [nchar](10) NOT NULL,
-      [Merchant_fk] [bigint] NOT NULL,
+      [Merchant] [bigint] NOT NULL,
 CONSTRAINT [PK_Campaign] PRIMARY KEY CLUSTERED
 (
       [Id] ASC
@@ -234,7 +234,7 @@ GO
 ALTER TABLE [setup].[Merchant] CHECK CONSTRAINT [FK_Merchant_Segment]
 GO
 /****** Object:  ForeignKey [FK_Campaign_Merchant]    Script Date: 02/12/2016 14:49:09 ******/
-ALTER TABLE [campaign].[Campaign]  WITH CHECK ADD  CONSTRAINT [FK_Campaign_Merchant] FOREIGN KEY([Merchant_fk])
+ALTER TABLE [campaign].[Campaign]  WITH CHECK ADD  CONSTRAINT [FK_Campaign_Merchant] FOREIGN KEY([Merchant])
 REFERENCES [setup].[Merchant] ([Id])
 GO
 ALTER TABLE [campaign].[Campaign] CHECK CONSTRAINT [FK_Campaign_Merchant]
@@ -243,5 +243,5 @@ GO
 INSERT INTO [setup].[Account] VALUES (GETDATE(), GETDATE(), 0, 'Root', 'root@spayce.com.br', 'spayce', 'SPAYCE', '77407172749', NULL)
 INSERT INTO [setup].[Segment] VALUES (GETDATE(), GETDATE(), 0, 'Transporte Aéreo')
 INSERT INTO [setup].[Merchant] VALUES (GETDATE(), GETDATE(), 0, '82393187000103', 'Mechant', NULL, 1)
-INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Pessoas Físicas', 'Domain', 'PessoaType')
-INSERT INTO [campaign].[Campaign] VALUES (GETDATE(), GETDATE(), 0, 'FDS nos EUA', GETDATE(), 'New', 1)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Pessoas Físicas', 'DOMAIN', 'PessoaType')
+INSERT INTO [campaign].[Campaign] VALUES (GETDATE(), GETDATE(), 0, 'FDS nos EUA', GETDATE(), 'NEW', 1)
