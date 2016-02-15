@@ -15138,7 +15138,7 @@
 													"height": 13,
 													"autoResize": false,
 													"underline": false,
-													"text": "-Default",
+													"text": "-Internal",
 													"horizontalAlignment": 0,
 													"verticalAlignment": 5
 												}
@@ -22588,7 +22588,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFS1XdXxF20RrE="
 									},
-									"name": "Default",
+									"name": "Internal",
 									"visibility": "private",
 									"isStatic": false,
 									"isLeaf": false,

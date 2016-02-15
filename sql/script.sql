@@ -223,7 +223,7 @@ CREATE TABLE [setup].[Tag](
       [Name] [nvarchar](100) NOT NULL,
       [TagType] [nchar](10) NOT NULL,
       [Attribute] [nvarchar](100) NOT NULL,
-      [Intern] [bit] NOT NULL,
+      [Internal] [bit] NOT NULL,
       [Merchant] [bigint] NULL,
 CONSTRAINT [PK_Tag] PRIMARY KEY CLUSTERED
 (
@@ -283,8 +283,23 @@ ALTER TABLE [campaign].[Target] CHECK CONSTRAINT [FK_Target_Tag]
 GO
 
 INSERT INTO [setup].[Account] VALUES (GETDATE(), GETDATE(), 0, 'Root', 'root@spayce.com.br', 'spayce', 'SPAYCE', '77407172749', NULL)
-INSERT INTO [setup].[Segment] VALUES (GETDATE(), GETDATE(), 0, 'Transporte Aéreo')
+INSERT INTO [setup].[Segment] VALUES (GETDATE(), GETDATE(), 0, 'Transporte A�reo')
 INSERT INTO [setup].[Merchant] VALUES (GETDATE(), GETDATE(), 0, '82393187000103', 'Mechant', NULL, 1)
-INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Pessoas Físicas', 'DOMAIN', 'PessoaType', 1, 1)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Pessoas F�sicas', 'DOMAIN', 'PessoaType', 0, 1)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Abandono de script', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Abandono de pagamento', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Escolha de op��o de script', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Valor do pagamento', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Meio de pagamento escolhido', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'N�mero de parcelas escolhido', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Escolha de voucher', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Escolha de promo code', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Like de deal', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Publica��o de deal no Facebook', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Encaminhamento de deal no Whatsapp', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Encaminhamento de deal no Messenger', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Encaminhamento de deal no Instagram', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Meio de pagamento cadastrado nas prefer�ncias do usu�rio', 'DOMAIN', 'PessoaType', 1, NULL)
+INSERT INTO [setup].[Tag] VALUES (GETDATE(), GETDATE(), 0, 'Aprova��o de pagamento', 'DOMAIN', 'PessoaType', 1, NULL)
 INSERT INTO [campaign].[Campaign] VALUES (GETDATE(), GETDATE(), 0, 'FDS nos EUA', GETDATE(), GETDATE(), 'NEW', 1)
 INSERT INTO [campaign].[Target] VALUES (GETDATE(), GETDATE(), 0, 'PF', NULL, 1, 1)
