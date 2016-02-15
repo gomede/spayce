@@ -101,7 +101,7 @@ CREATE TABLE [setup].[Account](
       [Version] [bigint] NOT NULL,
       [Name] [nvarchar](100) NOT NULL,
       [Email] [nvarchar](100) NOT NULL,
-      [Password] [nvarchar](100) NOT NULL,
+      [Password] [nvarchar](150) NOT NULL,
       [AutenticationType] [nchar](15) NOT NULL,
       [Identifier] [nvarchar](50) NOT NULL,
       [Image] [image] NULL,
