@@ -223,7 +223,7 @@ CREATE TABLE [setup].[Tag](
       [Name] [nvarchar](100) NOT NULL,
       [TagType] [nchar](10) NOT NULL,
       [Attribute] [nvarchar](100) NOT NULL,
-      [Default] [bit] NOT NULL,
+      [Intern] [bit] NOT NULL,
       [Merchant] [bigint] NULL,
 CONSTRAINT [PK_Tag] PRIMARY KEY CLUSTERED
 (
